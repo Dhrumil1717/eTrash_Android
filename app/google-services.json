@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "926257620204",
+    "firebase_url": "https://test2-445f2.firebaseio.com",
+    "project_id": "test2-445f2",
+    "storage_bucket": "test2-445f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926257620204:android:7d2706ca685e1099",
+        "android_client_info": {
+          "package_name": "com.example.dhrumil.test2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926257620204-4lc12htuh5t316t36db37i0jgc1krvn9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dhrumil.test2",
+            "certificate_hash": "8605a6ce544f46f58531f53d46a6640cc3566fdd"
+          }
+        },
+        {
+          "client_id": "926257620204-j8ocrvu4knobpq3k6jn97a8toeep4qno.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dhrumil.test2",
+            "certificate_hash": "38671394944d8696ca9c2f74730045fedc664e77"
+          }
+        },
+        {
+          "client_id": "926257620204-9d4lpoc50qlhofngp1gf4ab7vhnqhmut.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYkmgc2sZGzGS7cdMwyrdGlA1tquS7SX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926257620204-7p4na2ta4tnilgb94sc4enek7ftmg8p5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

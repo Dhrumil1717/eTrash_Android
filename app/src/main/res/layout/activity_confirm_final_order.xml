@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmFinalOrderActivity">
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:text="Please Type your shipment details"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/shipment_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="20dp"
+        android:hint="Your name"
+        android:textColorHint="@android:color/black" />
+
+
+    <EditText
+        android:id="@+id/shipment_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shipment_name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:hint="Your address"
+        android:textColorHint="@android:color/black" />
+
+    <EditText
+        android:id="@+id/shipment_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shipment_address"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:hint="Your City name"
+        android:textColorHint="@android:color/black" />
+
+    <RelativeLayout
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/shipment_city"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:padding="1dp">
+
+            <Spinner
+                android:id="@+id/spinnerCountries"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/editTextPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:digits="0123456789"
+                android:hint=" Phone no"
+                android:maxLength="10"
+                android:textColorHint="@android:color/black" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/resend"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/phone"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="40dp"
+        android:background="@color/colorGrassDark"
+
+        android:text="Send Otp" />
+
+    <EditText
+        android:id="@+id/editTextCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/resend"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="   OTP"
+        android:inputType="textMultiLine"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="57dp" />
+
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/editTextCode"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-214dp"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/confirm_final_order_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:background="@color/colorGrassDark"
+        android:text="Confirm"
+        android:textSize="20dp" />
+
+
+</RelativeLayout>

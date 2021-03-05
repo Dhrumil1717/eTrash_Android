@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Frame1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.Fragment1">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:background="#f6f6f6">
+
+
+        <TextView
+            android:id="@+id/tvWhy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:background="@android:color/darker_gray"
+            android:text="Why E-Trash ?"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:textSize="40dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/iv1"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_below="@id/tvWhy"
+            android:layout_marginTop="30dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/whyus" />
+
+
+    </RelativeLayout>
+</FrameLayout>

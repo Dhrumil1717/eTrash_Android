@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">E-Trash</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="app_signins"><u>Sign In</u></string>
+    <string name="app_signup"><u>Sign Up</u></string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home_activityy">HomeActivityy</string>
+    <string name="facebook_app_id">2207951419425708</string>
+    <string name="fb_login_protocol_scheme">fb2207951419425708</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string-array name="names">
+        <item>10:00 AM - 12:00PM</item>
+        <item>12:01 PM - 02:00PM</item>
+        <item>02:01 PM - 04:00PM</item>
+        <item>04:00 PM - 06:00PM</item>
+    </string-array>
+
+
+    <string name="have_account">already have an account?  </string>
+    <string name="sign_up"> Sign Up</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="don_t_account">Don\'t have an account</string>
+    <string name="sign_in">Sign In</string>
+    <string name="tagline">Selling waste is fun...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="or_nlogin_with_social_accounts">or \n login with social accounts</string>
+    <string name="SETINITFRAGMENT">setInitFragment</string>
+    <string name="welcomeimage">WelcomeImage</string>
+    <string name="welcome">Welcome</string>
+    <string name="please_login_or_sign_up">please login or sign up to continue using app</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="companyname">Company Name</string>
+    <string name="image">image</string>
+    <string name="please_sign_in_or_sign_up_to_continue_using_app">Please select which category of user you are</string>
+    <string name="SignUp">Sign Up</string>
+</resources>

@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         etemail = findViewById(R.id.email);
         etpassword = findViewById(R.id.password);
         companyname = findViewById(R.id.companyname);
-        etconfirmpassword = findViewById(R.id.etconfirmpassword);
+       // etconfirmpassword = findViewById(R.id.etconfirmPassword);
 
         bsignin = findViewById(R.id.email_sign_in_button);
         mLoginFormView = findViewById(R.id.login_form);

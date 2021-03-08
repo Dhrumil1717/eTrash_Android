@@ -28,7 +28,6 @@
         </activity>
 
         <activity android:name=".WelcomeActivity" />
-        <activity android:name=".OtpActivity" />
         <activity android:name=".PaymentGatewayCompany" />
 
         <activity android:name=".SplashScreen">
@@ -70,9 +69,6 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity
-            android:name=".SignupActivity"
-            android:theme="@style/AppTheme.dhrumil" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"

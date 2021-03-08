@@ -40,17 +40,11 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
     EditText nameEditText, addressEditText, cityEditText, editTextPhoneNumber;
     Button confirmOrderBtn, sendOTP;
     String totalAmount = "";
+    String phonenumber,newVerificationId,code;
     FirebaseAuth mAuth;
     Spinner spinner;
-    String phonenumber, codes;
-    Integer b = 1;
-    NotificationManagerCompat notificationManager;
-    PhoneAuthCredential credential;
-
-     String mVerificationId;
-     PhoneAuthProvider.ForceResendingToken mResendToken;
-     ProgressBar progressBar;
-     EditText etOTP;
+    ProgressBar progressBar;
+    EditText etOTP;
 
 
     @Override
@@ -81,7 +75,37 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
                 String number = editTextPhoneNumber.getText().toString().trim();
                 phonenumber = "+" + code + number;
                 progressBar.setVisibility(View.VISIBLE);
-                OptCheck();
+
+               // OptCheck();
+
+                PhoneAuthProvider.getInstance().verifyPhoneNumber(phonenumber,
+                                                                60,
+                                                                TimeUnit.SECONDS,
+                                                                ConfirmFinalOrderActivity.this,
+                                                                new PhoneAuthProvider.OnVerificationStateChangedCallbacks()
+                {
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential)
+                    {
+                        progressBar.setVisibility(View.GONE);
+
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e)
+                    {
+                         progressBar.setVisibility(View.GONE);
+                        Toast.makeText(ConfirmFinalOrderActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCodeSent(@NonNull String verificationID, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(ConfirmFinalOrderActivity.this, "otp sent", Toast.LENGTH_SHORT).show();
+                        newVerificationId = verificationID;
+                    }
+                });
+
 
             }
         });
@@ -90,155 +114,33 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-                Check();
+                code = etOTP.getText().toString();
+                if (newVerificationId!= null)
+                {
+                    progressBar.setVisibility(View.VISIBLE);
+                    PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(newVerificationId,code);
+                    FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressBar.setVisibility(View.GONE);
+
+                            if (task.isSuccessful())
+                            {
+                                Toast.makeText(ConfirmFinalOrderActivity.this, "SUCCESS", Toast.LENGTH_SHORT).show();
+                                Check();
+                            }
+                            else 
+                            {
+                                Toast.makeText(ConfirmFinalOrderActivity.this, "The verification code entered is invalid", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                }
             }
         });
     }
 
-    private void OptCheck()
-    {
-        sendVerificationCode(phonenumber);
-    }
-
-    private void sendVerificationCode(String phonenumber)
-    {
-        PhoneAuthOptions options =
-                PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber(phonenumber)       // Phone number to verify
-                        .setTimeout(6L, TimeUnit.SECONDS)
-                        .setActivity(this)// Timeout and unit
-                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
-                        .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
-        progressBar.setVisibility(View.GONE);
-    }
-
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
-        @Override
-        public void onVerificationCompleted(PhoneAuthCredential credential)
-        {
-            String code = credential.getSmsCode();
-            if (code != null)
-            {
-                codes=code;
-                Toast.makeText(ConfirmFinalOrderActivity.this, "Verification complete", Toast.LENGTH_SHORT).show();
-
-                progressBar.setVisibility(View.VISIBLE);
-               // verifyCode(code);
-            }
-            signInWithPhoneAuthCredential(credential);
-        }
-
-        @Override
-        public void onVerificationFailed(FirebaseException e) {
-            // This callback is invoked in an invalid request for verification is made,
-            // for instance if the the phone number format is not valid.
-
-            if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                // Invalid request
-                // ...
-            } else if (e instanceof FirebaseTooManyRequestsException) {
-                // The SMS quota for the project has been exceeded
-                // ...
-            }
-
-            // Show a message and update the UI
-            // ...
-        }
-
-        @Override
-        public void onCodeSent(@NonNull String verificationId,
-                               @NonNull PhoneAuthProvider.ForceResendingToken token) {
-            // The SMS verification code has been sent to the provided phone number, we
-            // now need to ask the user to enter the code and then construct a credential
-            // by combining the code with a verification ID.
-
-
-            // Save verification ID and resending token so we can use them later
-            mVerificationId = verificationId;
-            mResendToken = token;
-
-            // ...
-        }
-    };
-
-    private void verifyCode(String code)
-    {
-        codes = code;
-       // credential = PhoneAuthProvider.getCredential(verificationid, code);
-      //  signInWithCredential(credential);
-    }
-
-    private void signInWithCredential(PhoneAuthCredential credential) {
-        Integer a = 1;
-
-        if (a == 1) {
-            Toast.makeText(this, "Otp received", Toast.LENGTH_SHORT).show();
-            progressBar.setVisibility(View.GONE);
-        } else {
-
-            Toast.makeText(ConfirmFinalOrderActivity.this, "Error occured", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-
-                            FirebaseUser user = task.getResult().getUser();
-                            Toast.makeText(ConfirmFinalOrderActivity.this, "Firebase verification Successful", Toast.LENGTH_SHORT).show();
-                            // ...
-                        } else {
-                            // Sign in failed, display a message and update the UI
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                // The verification code entered was invalid
-                            }
-                        }
-                    }
-                });
-    }
-
-
-//    mCallBack = new PhoneAuthProvider.OnVerificationStateChangedCallbacks()
-//    {
-//        @Override
-//        public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken)
-//        {
-//            Toast.makeText(ConfirmFinalOrderActivity.this, "in Callback 1", Toast.LENGTH_SHORT).show();
-//           // super.onCodeSent(s, forceResendingToken);
-//            verificationid = s;
-//            mResendToken = forceResendingToken;
-//
-//        }
-//
-//        @Override
-//        public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential)
-//        {
-//            Toast.makeText(ConfirmFinalOrderActivity.this, "in Callback 2", Toast.LENGTH_SHORT).show();
-//            String code = phoneAuthCredential.getSmsCode();
-//            if (code != null) {
-//                Toast.makeText(ConfirmFinalOrderActivity.this, "in Callback 3", Toast.LENGTH_SHORT).show();
-//
-//                progressBar.setVisibility(View.VISIBLE);
-//                verifyCode(code);
-//            }
-//            else
-//            {
-//                Toast.makeText(ConfirmFinalOrderActivity.this, "in Callback 4", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        }
-//
-//        @Override
-//        public void onVerificationFailed(FirebaseException e) {
-//            Toast.makeText(ConfirmFinalOrderActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-//        }
-//    };
     private void Check() {
         View focusView = null;
 
@@ -248,7 +150,6 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             focusView.requestFocus();
             Toast.makeText(this, "Please Provide your Name", Toast.LENGTH_SHORT).show();
         }
-
 
         if (TextUtils.isEmpty(addressEditText.getText().toString())) {
             addressEditText.setError(getString(R.string.error_field_required));
@@ -282,12 +183,8 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             paymentgateway();
         }
     }
-
-
-
-
     private void paymentgateway() {
-        if (etOTP.getText().toString() == codes) {
+
             Intent ii = new Intent(getApplicationContext(), PaymentGateway.class);
             ii.putExtra("total", totalAmount);
             ii.putExtra("ph", editTextPhoneNumber.getText().toString());
@@ -295,11 +192,5 @@ public class ConfirmFinalOrderActivity extends AppCompatActivity {
             ii.putExtra("ci", cityEditText.getText().toString());
             ii.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(ii);
-        }
-        else
-        {
-            Toast.makeText(this, "code is"+ codes, Toast.LENGTH_LONG).show();
-            Toast.makeText(this, "U have entered incorrect OTP" + codes + "  " + etOTP.getText().toString(), Toast.LENGTH_LONG).show();
-        }
     }
 }

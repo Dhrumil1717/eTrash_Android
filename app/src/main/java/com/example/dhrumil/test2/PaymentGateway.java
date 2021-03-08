@@ -222,7 +222,6 @@ public class PaymentGateway extends AppCompatActivity {
                             ii.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(ii);
                             finish();
-
                         }
                     }
                 });
